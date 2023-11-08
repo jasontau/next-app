@@ -1,25 +1,38 @@
 // GET
 // POST
 // PUT - update
-import schema from './schema'
+
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/prisma/client"
+import schema from './schema'
 
 // adding NextRequest param prevents caching
-export function GET(request: NextRequest) {
-  // fetch users from db
-  return NextResponse.json([
-    { id: 1, name: "Jason" },
-    { id: 2, name: "Bob" }
-  ])
+export async function GET(request: NextRequest) {
+  const users = await prisma.user.findMany()
+
+  return NextResponse.json(users)
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const validation = schema.safeParse(body)
   // validate
-  if (!validation.success) return NextResponse.json(validation.error.errors, {status: 400})
+  if (!validation.success) return NextResponse.json(validation.error.errors, { status: 400 })
 
-  // if invalid, return 400
+  const user = await prisma.user.findUnique({
+    where: { email: body.email }
+  })
 
-  return NextResponse.json({ id: 1, name: body.name }, { status: 201 })
+  if (user) return NextResponse.json({ error: "User already exists" }, { status: 400 })
+
+  const createdUser = await prisma.user.create({
+    data: {
+      name: body.name,
+      email: body.email
+    }
+  })
+
+
+
+  return NextResponse.json(createdUser, { status: 201 })
 }
