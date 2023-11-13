@@ -14,9 +14,9 @@ const UploadPage = () => {
     <>
       {publicId && <CldImage src={publicId} width={270} height={180} alt="a coffee image" />}
       <CldUploadWidget
-        uploadPreset={process.env.CLOUDINARY_UPLOAD_PRESET} 
+        uploadPreset={process.env.CLOUDINARY_UPLOAD_PRESET}
         options={{
-          sources:['local'],
+          sources: ['local'],
           multiple: false
         }}
         onUpload={(result, widget) => {
