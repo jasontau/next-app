@@ -1,3 +1,6 @@
+// NOTE: endpoint is for example only
+// emails should be sent as part of business operations
+
 import WelcomeTemplate from '@/emails/WelcomeTemplate';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
