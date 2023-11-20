@@ -4,6 +4,7 @@ import ProductCard from './components/ProductCard'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
 import cat from '@/public/images/blackcat_stencil.png'
+import { Metadata } from 'next'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
@@ -26,4 +27,9 @@ export default async function Home() {
       </div>
     </main>
   )
+}
+
+export const metadata: Metadata = {
+  // overrides layout
+  title: '...'
 }
