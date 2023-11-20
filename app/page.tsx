@@ -1,13 +1,8 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
-import ProductCard from './components/ProductCard'
-import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
 import cat from '@/public/images/blackcat_stencil.png'
-import { Metadata } from 'next'
-import { useState } from 'react'
+import Image from 'next/image'
+import ProductCard from './components/ProductCard'
 
 export default function Home() {
   // const session = await getServerSession(authOptions)
